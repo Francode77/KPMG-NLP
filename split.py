@@ -1,9 +1,7 @@
 '''
-usage:   unspread.py my.pdf
-Creates unspread.my.pdf
-Chops each page in half, e.g. if a source were
-created in booklet form, you could extract individual
-pages.
+Program expects Data/A/100/something.pdf structure
+Create a "splitted" folder for the output and then run the program
+This splits pdfs indiscriminately, it doesnt recognize if a file needs to be split or not
 '''
 
 import sys
