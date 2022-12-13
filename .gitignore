@@ -130,3 +130,8 @@ dmypy.json
 .pyre/
 # Data
 Data/
+splitted/
+*.csv
+*.pdf
+*.txt
+*.xlsx
