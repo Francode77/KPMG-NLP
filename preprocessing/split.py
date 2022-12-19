@@ -10,7 +10,7 @@ import os
 from alive_progress import alive_bar
 from pdfminer.high_level import extract_text
 
-directory = "Data"
+directory = "./data"
 from pdfrw import PdfReader, PdfWriter, PageMerge
 
 try:
