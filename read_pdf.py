@@ -28,16 +28,16 @@ def classifier(pdf_file):
         return res
     
     
-a = listdir("Data/A")
-b = listdir("Data/B")
+a = listdir("data/A")
+b = listdir("data/B")
 
 text = []
 image = []
 
 with alive_progress.alive_bar() as bar :
     for directory in a:
-        for document in listdir(f"Data/A/{directory}"):
-            result = classifier(f"Data/A/{directory}/{document}")
+        for document in listdir(f"data/A/{directory}"):
+            result = classifier(f"data/A/{directory}/{document}")
             if result == 0:
                 text.append(document)
             else:
@@ -46,8 +46,8 @@ with alive_progress.alive_bar() as bar :
 
 with alive_progress.alive_bar() as bar :
     for directory in b:
-        for document in listdir(f"Data/B/{directory}"):
-            result = classifier(f"Data/B/{directory}/{document}")
+        for document in listdir(f"data/B/{directory}"):
+            result = classifier(f"data/B/{directory}/{document}")
             if result == 0:
                 text.append(document)
             else:
