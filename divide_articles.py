@@ -31,6 +31,6 @@ with alive_bar(len(doc_list)) as bar:
         bar()
         
 df = pd.DataFrame.from_dict(divided_docs,orient="index")
-df.to_csv("divided.csv")
+df.to_excel("divided.xlsx")
 with open ("not_divided.txt","w+",encoding="utf-8") as f:
     print(not_divided,file=f)
