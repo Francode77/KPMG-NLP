@@ -13,15 +13,9 @@ TOKEN = "5852402848:AAEo_0pts2uWXfEoBSC_W4kgml3mBxAslQc"
 
 import os 
 import shutil
-from statistics import mean,median
-from pdfminer.high_level import extract_text
-from pdfrw import PdfReader, PdfWriter, PageMerge
-import PyPDF2
-
 import requests
-
 import pandas as pd
-import re
+import json
 import shutil
 from os import listdir
 
@@ -36,7 +30,7 @@ TOKEN = "5852402848:AAEo_0pts2uWXfEoBSC_W4kgml3mBxAslQc"
 
 
 def get_comitee (file_id:str):
-    with open("comite_list.txt") as f:
+    with open("../csv/comite_list.txt") as f:
         pcs_from_text = f.read()
 
     pcs_from_text = pcs_from_text.replace("\n","")
@@ -44,7 +38,7 @@ def get_comitee (file_id:str):
 
     try:
         number = file_id.split("-")[0]
-        return res[str(number)]
+        return number, res[str(number)]
     except KeyError:
         return "Invalid number of comitee"
  
@@ -100,11 +94,11 @@ def process (document_id):
     toolarge='FALSE'
     returnlist={'cao':'None','depot':'None','register': 'None','sum': 'None','url': 'None'}
 
-    PC=get_comitee(document_id)
+    PC_nr, PC=get_comitee(document_id)
 
     if '.pdf' in document_id:
         document_id=document_id[:-4]
-        tel_send_message(chat_id,f'New CAO alert from Joint Commite: {PC}')
+        tel_send_message(chat_id,f'New CAO alert from Joint Commite: {PC_nr} ({PC})')
 
     # TEST if WE can SPLIT a FILE
     v_split_status_code=split_file(path,document_id,language)
