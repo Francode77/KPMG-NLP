@@ -85,13 +85,15 @@ create a telegram webhook with CMD:
  
 Get the forwarding URL from the ngrok dashboard
 
-run ./app/server.py
+`run ./app/server.py`
 
 open http://127.0.0.1/input
 
 # Results
 
-The results of processing a file will be output to the Telegram bot channel
+The model performs OK on one computer but not OK on google collab. Also saving and loading the model produces inconsistencies. 
+
+The results of processing a file will be output to the Telegram bot channel.
  
 
 
@@ -101,11 +103,11 @@ The results of processing a file will be output to the Telegram bot channel
 
 
 ## Contributors
-- [Sedat Mehmed](https://github.com/sedat01)
 - [Frank Trioen](https://github.com/Francode77)
+- [Sedat Mehmed](https://github.com/sedat01)
 - [shakeel Ahmad](https://github.com/shakilkhan8219)
 
 ## Acknowledgements
 
- - [BeCode](https://becode.org/) coaches(Louis & Chrysanthi)
+ - [BeCode](https://becode.org/) coaches (Louis & Chrysanthi)
  - [KPMG](https://home.kpmg/xx/en/home.html)
