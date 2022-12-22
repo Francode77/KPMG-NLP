@@ -33,8 +33,8 @@ MANIFEST
 *.manifest
 *.spec
 
-# Installer logs
 pip-log.txt
+# Installer logs
 pip-delete-this-directory.txt
 
 # Unit test / coverage reports
@@ -129,11 +129,16 @@ dmypy.json
 # Pyre type checker
 .pyre/
 # Data
+processed_data/
+data/
+csv/
+tmp/
+split/
+unprocessed_data/
 Data/
 splitted/
 *.csv
 *.pdf
-*.txt
 *.xlsx
 *.zip
 summarizer/
