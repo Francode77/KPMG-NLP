@@ -11,6 +11,12 @@ TOKEN = "5852402848:AAEo_0pts2uWXfEoBSC_W4kgml3mBxAslQc"
 # https://api.telegram.org/bot5852402848:AAEo_0pts2uWXfEoBSC_W4kgml3mBxAslQc/setWebhook?url=https://96ba-78-23-2-11.eu.ngrok.io
 
 
+"""
+pip install --upgrade google-cloud-documentai
+pip install fasttext
+pip install pyPDF2
+"""
+
 import os 
 import shutil
 import requests
@@ -98,7 +104,8 @@ def process (document_id):
 
     if '.pdf' in document_id:
         document_id=document_id[:-4]
-        tel_send_message(chat_id,f'New CAO alert from Joint Commite: {PC_nr} ({PC})')
+        if os.path.exists(os.path.join('tmp',f'{document_id}.pdf')):
+            tel_send_message(chat_id,f'New CAO alert from Joint Commite: {PC_nr} ({PC})')
 
     # TEST if WE can SPLIT a FILE
     v_split_status_code=split_file(path,document_id,language)
@@ -169,13 +176,12 @@ def process (document_id):
 
     tel_send_message(chat_id,f'Summary:\n\n{summary}')
     url='https://public-search.werk.belgie.be/website-download-service/joint-work-convention/'
-
     url=make_link(document_id)    
     url+=f'.pdf'
-
-
-
     tel_send_message(chat_id,f'Link: {url} ')
+
+
+
     returnlist={'PC':PC,'cao':cao_nr,'depot':depot,'register':registr,'sum':summary,'url':url}
     return returnlist
 
