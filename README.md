@@ -103,8 +103,8 @@ The results of processing a file will be output to the Telegram bot channel.
 
 
 ## Contributors
-- [Frank Trioen](https://github.com/Francode77)
 - [Sedat Mehmed](https://github.com/sedat01)
+- [Frank Trioen](https://github.com/Francode77)
 - [shakeel Ahmad](https://github.com/shakilkhan8219)
 
 ## Acknowledgements
