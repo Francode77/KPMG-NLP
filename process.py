@@ -106,6 +106,7 @@ def process (document_id):
         document_id=document_id[:-4]
         if os.path.exists(os.path.join('tmp',f'{document_id}.pdf')):
             tel_send_message(chat_id,f'New CAO alert from Joint Commite: {PC_nr} ({PC})')
+    tel_send_message(chat_id,f'New CAO alert!\n\n Joint Commite: {PC_nr} ({PC})')
 
     # TEST if WE can SPLIT a FILE
     v_split_status_code=split_file(path,document_id,language)
@@ -141,7 +142,7 @@ def process (document_id):
         dst_path = os.path.join(path)
         dst_file= os.path.join(dst_path,f'{document_id}.txt')
         shutil.copy(src_path, dst_file) 
-        tel_send_message(chat_id,f'Moved {document_id}.txt')
+        #tel_send_message(chat_id,f'Moved {document_id}.txt')
  
     tel_send_message(chat_id,f'Feeding to Google DocumentAI.. ')
 
