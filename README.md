@@ -37,14 +37,11 @@ For topic detection we use Rake_NLTK
 # Includes
 
 **Preprocessing**
-- classification-meta_cla: Makes classification of documents based on highest ranked words in the metadata title descriptions (with NLTK and Rake-NLTK)
+
+1. For handling the files:
 
 - fix_languages			 : Checks the languages of all extracted text files and switches the NL and FR version when needed.
-- make_target            : Makes the targets for our model. 
-      -This can be a list of most important keywords, extracted with NLP (creates a dbase with the highest ranked keywords per document with Rake-NLTK). 
-      -It can also be a list of the title for each document, extracted from the metadata .csv
-                          The output will be written to a /csv folder
-                          
+
 - move_unprocessed_files : Moves files that have not been processed yet.
 
 - process_docs_cloud		 : Processes files with Google DocumentAI.
@@ -52,6 +49,19 @@ For topic detection we use Rake_NLTK
 - split_files				 : Detects if files needed to be split vertically by calculating mean and average length number and max length of sentences in the file.
 
 - split_max_page_10		 : Splits .pdf documents with more than 10 pages for the Google Document AI (max page limit=10).
+
+2. For making targets for the model:
+
+Deprecated:
+- classification-meta_cla: Makes classification of documents based on highest ranked words in the metadata title descriptions (with NLTK and Rake-NLTK)
+
+- make_target            : Makes the targets for our model. <br>
+      -This can be a list of most important keywords, extracted with NLP (creates a dbase with the highest ranked keywords per document with Rake-NLTK). 
+      -It can also be a list of the title for each document, extracted from the metadata .csv<br>
+                          The output will be written to a /csv folder
+New method:
+- make_targets_from_metadata.ipynb: New file to make better targets with Rake-NLTK (**use this instead of classification-meta_cla**)
+
 
 - visual_inspection		 : File for quick  visual inspection of the extracted text files.
 
