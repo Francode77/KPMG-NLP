@@ -35,8 +35,7 @@ For topic detection we use Rake_NLTK
   CLA_meta_from_2018.csv as provided by KPMG
 
 # Includes
-
-**Preprocessing**
+###Preprocessing
 
 1. For handling the files:
 
@@ -65,13 +64,17 @@ New method:
 
 - visual_inspection		 : File for quick  visual inspection of the extracted text files.
 
-**Analysis**
+###Analysis
   - concat_NL_doc : file to plot graphs
 
-**Model**
+###Model
+  **Deprecated**
   - Model :  Makes a model for classification of documents. Works with BERT and a Dutch RobBERTa tensorflow pretrained model.
+ **Now use**
+  - model_h_robberta_clusters
+  - model_h_robberta_clusters_RUN
   
-**Processing**
+###Processing
  - split_text_horizontally : Function to process a .pdf file that has not been split with DocumentAI. Detects the languages per paragraph and writes output to NL and FR .txt files
  - split_pdf_vertically    : Function to detect if an input .pdfs has to be split. Detection method as explained above
  - split_max_10_pages      : Function to detect if an input .pdfs has to be split into pages for DocumentAI (max page limit=10).  
@@ -79,7 +82,7 @@ New method:
  - get_abstr_summary       : Function to produce and abstract summary from a input text. Uses summi
  - combine_txt_files       : Function to combine text file that were obtained after the split_max_10_pages
  
- **App**
+ ###App
  
  - server                  : The Flask server to run for hosting a webpage for the demo
  - templates               : Templates for the webserver
