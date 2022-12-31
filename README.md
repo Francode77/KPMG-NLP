@@ -30,6 +30,9 @@ For the model we use https://github.com/iPieter/RobBERT (A Dutch RoBERTa-based l
 For the summarization we use MBartForConditionalGeneration
 For topic detection we use Rake_NLTK
 
+# Prerequisites
+
+  CLA_meta_from_2018.csv as provided by KPMG
 
 # Includes
 
@@ -37,8 +40,11 @@ For topic detection we use Rake_NLTK
 - classification-meta_cla: Makes classification of documents based on highest ranked words in the metadata title descriptions (with NLTK and Rake-NLTK)
 
 - fix_languages			 : Checks the languages of all extracted text files and switches the NL and FR version when needed.
-- make_target            : Makes the targets for our model. This can be a list of most important keywords, extracted with NLP (creates a dbase with the highest ranked keywords per document with Rake-NLTK)
-
+- make_target            : Makes the targets for our model. 
+      -This can be a list of most important keywords, extracted with NLP (creates a dbase with the highest ranked keywords per document with Rake-NLTK). 
+      -It can also be a list of the title for each document, extracted from the metadata .csv
+                          The output will be written to a /csv folder
+                          
 - move_unprocessed_files : Moves files that have not been processed yet.
 
 - process_docs_cloud		 : Processes files with Google DocumentAI.
@@ -91,15 +97,14 @@ open http://127.0.0.1/input
 
 # Results
 
-The model performs OK on one computer but not OK on google collab. Also saving and loading the model produces inconsistencies. 
+The preprocessing works great and we were able to preprocess ALL documents.
 
-The results of processing a file will be output to the Telegram bot channel.
+Google DocumentAI OCR reading works great on .pdf files with a single language
+
+Classification model performed OK on one computer but not on other computers or Google collab. Also saving and loading the model produced inconsistencies. 
+
+For the client app we made a simple tool to produce results with telegram. The results of processing a file will be output to a Telegram bot channel.
  
-
-
-
-
-
 
 
 ## Contributors
