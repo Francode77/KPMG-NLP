@@ -67,9 +67,9 @@ New method:
 ###Analysis
   - concat_NL_doc : file to plot graphs
 
-###Model
+###Model<br>
   **Deprecated**
-  - Model :  Makes a model for classification of documents. Works with BERT and a Dutch RobBERTa tensorflow pretrained model.
+  - Model :  Makes a model for classification of documents. Works with BERT and a Dutch RobBERTa tensorflow pretrained model.<br>
  **Now use**
   - model_h_robberta_clusters
   - model_h_robberta_clusters_RUN
