@@ -12,6 +12,7 @@ This is a Natural language processing (NLP) project, aiming to extract relevant 
 First we preprocess the files by doing different checks, because of a vertical or horizontal division by language of the documents. Then we feed the documents to Google DocumentAI, which produces a result as a dataframe and .txt files, split according to their language. 
 
 The resulting files are then checked with language detection and if necessary, split. And then moved to the /processed_data folder
+
 **Training**
 
 On this data we applied clustering and fine-tuned a pretrained Dutch based Roberta model from KULeuven ([Dutch RoBERTa-based Language Model](https://github.com/iPieter/RobBERT)).
@@ -20,16 +21,19 @@ For demo we run a telegram bot for notification on Telegram
 
 **Application**
 
-A webserver will run with an input form. There we will give a file that is supposedly extracted from a RSS feed or similar method.
+A webserver will run with an input form. There we will locate a new CLA file in .pdf format that is supposedly obtained from a feed or a similar method.
 
 **Processing** 
 
 A file input on the webserver is feeded to the process.py file which will run modified functions from preprocessing sequentially.
 
-For language detection we use FastTEXT 
-For the model we use https://github.com/iPieter/RobBERT (A Dutch RoBERTa-based language model)
-For the summarization we use MBartForConditionalGeneration
-For topic detection we use Rake_NLTK
+-For language detection we use FastTEXT 
+-For the summarization we use MBartForConditionalGeneration
+
+*To be implemented: 
+- For topic detection we will use Rake_NLTK
+- For target labeling we will use our fine-tuned model from pretrained RobBERT*
+
 
 # Prerequisites
 
