@@ -32,7 +32,8 @@ For topic detection we use Rake_NLTK
 
 # Prerequisites
 
-  CLA_meta_from_2018.csv as provided by KPMG
+  - CLA_meta_from_2018.csv as provided by KPMG
+  - CLA documents as published, in .pdf format
 
 # Includes
 ###Preprocessing
@@ -71,8 +72,8 @@ New method:
   **Deprecated**
   - Model :  Makes a model for classification of documents. Works with BERT and a Dutch RobBERTa tensorflow pretrained model.<br>
  **Now use**
-  - model_h_robberta_clusters
-  - model_h_robberta_clusters_RUN
+  - model_h_robberta_clusters : To make the targets from 100 clusters
+  - model_h_robberta_clusters_RUN : To Run the model on a .csv file with condensed text and cluster targets
   
 ###Processing
  - split_text_horizontally : Function to process a .pdf file that has not been split with DocumentAI. Detects the languages per paragraph and writes output to NL and FR .txt files
@@ -108,19 +109,42 @@ Get the forwarding URL from the ngrok dashboard
 
 open http://127.0.0.1/input
 
+# Method
+
+- Preprocessing is done in sequential order and with Google DocumentAI (synchronous)
+- Model is based on clusters
+- The text from the preprocessing output is processed with NLTK_Rake with DEGREE_TO_RATIO method to extract the most important phrases and keywords
+- From these condensed text we make 100 clusters with KMeans
+- We train the model based on a dataset of the processed texts with these 100 clusters
+   
+  - Model = robbert-v2-dutch-based
+  - Optimizer= AdamW
+  - Tokenizer= RobertaTokenizer
+  - Loss = CategoricalCrossentropy
+
 # Results
 
 - The preprocessing works great and we were able to preprocess ALL documents.
-- Google DocumentAI OCR reading works great on .pdf files with a single language
-- Classification model is based on RobbertA and targets 100 different clusters.
+- Google DocumentAI OCR reading works great on .pdf files with a single language, so we feed single language docs or check each paragraph with FastText language detection
+- Classification model is based on a Dutch based Robberta model from KU_Leuven and targets 100 different clusters.
 
   - We claim a classification accuracy of about 67% on the validation set (15% of the data)
+  - This figure shows the results with model trained on processed text with max length of 368 in 12 epochs, 4 batches, with CategoricalCrossentropy and AdamW optimizer
+
+  ![Result](model/output/model_h_robberta_clusters_12e_4b_CC_AdamW_maxlength_368.png)
+
+
   - Training results are stored in /model/output
   - Model is saved in /model
   - 
 -For the client app we made a simple tool to produce results with telegram. The results of processing a file will be output to a Telegram bot channel.
  
-
+# Improvements
+There is room for many improvements
+- Language detection can perform better when feeding through DocumentAI OCR and then checking paragraphs for all documents, also the vertically split files
+- We need to find a way to remove 'Erratum' blocks
+- Perhaps LDA can help us to define the topic of a document better
+- Fine tuning the extrated text processing method might improve model results
 
 ## Contributors
 - [Sedat Mehmed](https://github.com/sedat01)
