@@ -110,13 +110,15 @@ open http://127.0.0.1/input
 
 # Results
 
-The preprocessing works great and we were able to preprocess ALL documents.
+- The preprocessing works great and we were able to preprocess ALL documents.
+- Google DocumentAI OCR reading works great on .pdf files with a single language
+- Classification model is based on RobbertA and targets 100 different clusters.
 
-Google DocumentAI OCR reading works great on .pdf files with a single language
-
-Classification model performed OK on one computer but not on other computers or Google collab. Also saving and loading the model produced inconsistencies. 
-
-For the client app we made a simple tool to produce results with telegram. The results of processing a file will be output to a Telegram bot channel.
+  - We claim a classification accuracy of about 67% on the validation set (15% of the data)
+  - Training results are stored in /model/output
+  - Model is saved in /model
+  - 
+-For the client app we made a simple tool to produce results with telegram. The results of processing a file will be output to a Telegram bot channel.
  
 
 
