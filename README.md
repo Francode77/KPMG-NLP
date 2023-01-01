@@ -114,7 +114,7 @@ open http://127.0.0.1/input
 
 - Preprocessing is done in sequential order and with Google DocumentAI (synchronous)
 - Model is based on clusters
-- The text from the preprocessing output is processed with NLTK_Rake with DEGREE_TO_RATIO method to extract the most important phrases and keywords
+- The text from the preprocessing output is processed with NLTK_Rake with DEGREE_TO_RATIO method to extract the most important phrases and keywords, while filtering out a small array of words suchs as 'month', 'year' and verbs.. ( to be improved!)
 - From these condensed text we make 100 clusters with KMeans
 - We train the model based on a dataset of the processed texts with these 100 clusters
    
@@ -145,6 +145,8 @@ There is room for many improvements
 - We need to find a way to remove 'Erratum' blocks
 - Perhaps LDA can help us to define the topic of a document better
 - Fine tuning the extrated text processing method might improve model results
+  - Remove much more irrelevant words and word categories (verbs, time,..)
+  - Include repitions (to be tested)
 
 ## Contributors
 - [Sedat Mehmed](https://github.com/sedat01)
