@@ -38,7 +38,7 @@ For topic detection we use Rake_NLTK
 # Includes
 ### Preprocessing (for all documents)
 
-1. For handling the files:
+**1. For handling the files:**
 - fix_languages			 : Checks the languages of all extracted text files and switches the NL and FR version when needed.
 
 - move_unprocessed_files : Moves files that have not been processed yet.
@@ -49,7 +49,7 @@ For topic detection we use Rake_NLTK
 
 - split_max_page_10		 : Splits .pdf documents with more than 10 pages for the Google Document AI (max page limit=10).
 
-2. For making targets for the model:
+**2. For making targets for the model:**
 - (Deprecated) classification-meta_cla: Makes classification of documents based on highest ranked words in the metadata title descriptions (with NLTK and Rake-NLTK)
 
 - (Deprecated) make_target            : Makes the targets for our model. <br>
@@ -59,16 +59,14 @@ For topic detection we use Rake_NLTK
 
 - make_targets_from_metadata.ipynb: New file to make better targets with Rake-NLTK (**use this instead of classification-meta_cla**)
 
-3. For checking the output of text processing:
+**3. For checking the output of text processing:**
 - visual_inspection		 : File for quick  visual inspection of the extracted text files.
 
 ### Analysis
   - concat_NL_doc : file to plot graphs
 
 ### Model 
-  **Deprecated**
-  - Model :  Makes a model for classification of documents. Works with BERT and a Dutch RobBERTa tensorflow pretrained model.<br>
- **Now use**
+  - ( Deprecated) model :  Makes a model for classification of documents. Works with BERT and a Dutch RobBERTa tensorflow pretrained model.<br>
   - model_h_robberta_clusters : To make the targets from 100 clusters
   - model_h_robberta_clusters_RUN : To Run the model on a .csv file with condensed text and cluster targets
   
@@ -80,7 +78,7 @@ For topic detection we use Rake_NLTK
  - get_abstr_summary       : Function to produce and abstract summary from a input text. Uses summi
  - combine_txt_files       : Function to combine text file that were obtained after the split_max_10_pages
  
- ###App
+ ### App
  
  - server                  : The Flask server to run for hosting a webpage for the demo
  - templates               : Templates for the webserver
@@ -120,6 +118,9 @@ open http://127.0.0.1/input
   - Tokenizer= RobertaTokenizer
   - Loss = CategoricalCrossentropy
 
+- Training results are stored in /model/output
+- Model is saved in /model
+
 # Results
 
 - The preprocessing works great and we were able to preprocess ALL documents.
@@ -130,12 +131,8 @@ open http://127.0.0.1/input
   - This figure shows the results with model trained on processed text with max length of 368 in 12 epochs, 4 batches, with CategoricalCrossentropy and AdamW optimizer
 
   ![Result](model/output/model_h_robberta_clusters_12e_4b_CC_AdamW_maxlength_368.png)
-
-
-  - Training results are stored in /model/output
-  - Model is saved in /model
   - 
--For the client app we made a simple tool to produce results with telegram. The results of processing a file will be output to a Telegram bot channel.
+- For the client app we made a simple tool to produce results with telegram. The results of processing a file will be output to a Telegram bot channel.
  
 # Improvements
 There is room for many improvements
