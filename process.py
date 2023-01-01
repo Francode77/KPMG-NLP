@@ -4,11 +4,11 @@
 #type : ngrok http 5000
 #Copy https://96ba-78-23-2-11.eu.ngrok.io -> http://localhost:80
 
-TOKEN = "5852402848:AAEo_0pts2uWXfEoBSC_W4kgml3mBxAslQc"
+TOKEN = ""
 
 # Get the 
 # Setup the webhook
-# https://api.telegram.org/bot5852402848:AAEo_0pts2uWXfEoBSC_W4kgml3mBxAslQc/setWebhook?url=https://96ba-78-23-2-11.eu.ngrok.io
+# https://api.telegram.org/...
 
 
 """
@@ -32,7 +32,7 @@ from processing.split_max_10_pages import split_max_page_10
 from processing.combine_txt_files import combine_txt_files
 from processing.split_pdf_vertically import split_file,splitpage
 
-TOKEN = "5852402848:AAEo_0pts2uWXfEoBSC_W4kgml3mBxAslQc"
+TOKEN = ""
 
 
 def get_comitee (file_id:str):
