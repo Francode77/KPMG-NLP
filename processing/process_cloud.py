@@ -1,10 +1,10 @@
-project_id = 'kmpg-case'
+project_id = ''
 location = 'eu'  
 processor_display_name = 'PDF_PROCESSOR_EU' 
 processor_type = 'OCR_PROCESSOR'  
 processor_version = 'rc' 
 mime_type = 'application/pdf' 
-processor_id = 'fde971a6ca78aafa'
+processor_id = ''
 
 import os
 import re
