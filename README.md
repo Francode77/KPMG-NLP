@@ -144,7 +144,7 @@ There is room for many improvements
 - Language detection can perform better when feeding through DocumentAI OCR and then checking paragraphs for all documents, also the vertically split files
 - We need to find a way to remove 'Erratum' blocks
 - Perhaps LDA can help us to define the topic of a document better
-- Fine tuning the extrated text processing method might improve model results
+- Fine tuning the extrated text processing method might improve model results drastically
   - Remove much more irrelevant words and word categories (verbs, time,..)
   - Include repitions (to be tested)
 
