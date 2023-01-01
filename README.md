@@ -2,7 +2,7 @@
 
 
 ## Scope:
-This junior educational project is developed for KPMG, an International Limited is a multinational professional services network, and one of the Big Four accounting organizations. 
+This project is developed for KPMG, an International Limited is a multinational professional services network, and one of the Big Four accounting organizations. 
 This is a Natural language processing (NLP) project, aiming to extract relevant information, present it in structured way to the client by incorporating the extracted information into available platforms.
 
 ## Project Description:
