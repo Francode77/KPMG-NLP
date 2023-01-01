@@ -12,8 +12,9 @@ This is a Natural language processing (NLP) project, aiming to extract relevant 
 First we preprocess the files by doing different checks, because of a vertical or horizontal division by language of the documents. Then we feed the documents to Google DocumentAI, which produces a result as a dataframe and .txt files, split according to their language. 
 
 The resulting files are then checked with language detection and if necessary, split. And then moved to the /processed_data folder
+**Training**
 
-On this data we tried to apply a model (RobBERT) to classify documents. 
+On this data we applied clustering and fine-tuned a pretrained Dutch based Roberta model from KULeuven.![Dutch RoBERTa-based Language Model](https://github.com/iPieter/RobBERT)
 
 For demo we run a telegram bot for notification on Telegram
 
