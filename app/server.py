@@ -25,7 +25,7 @@ sys.path.append(parent)
 
 from process import process
 
-TOKEN = "5852402848:AAEo_0pts2uWXfEoBSC_W4kgml3mBxAslQc"
+TOKEN = 'TELEGRAM TOKEN'
 app = Flask(__name__)
  
 def parse_message(message):
