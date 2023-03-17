@@ -22,6 +22,7 @@ On this data we applied clustering and fine-tuned a pretrained Dutch based Rober
 A webserver will run with an input form. There we will locate a new CLA file in .pdf format that is supposedly obtained from a feed or a similar method.
 
 For demo we run a telegram bot for notification on Telegram
+![telegram bot](https://github.com/Francode77/KPMG-NLP/blob/francode/assets/live_processing.png)
 
 
 **Live-Processing** 
