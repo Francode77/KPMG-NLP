@@ -1,3 +1,8 @@
+
+# This file contains the functions to be called from the app
+# Everything is done by process_pdf()
+
+# Google DocumentAI parameters
 project_id = ''
 location = 'eu'  
 processor_display_name = 'PDF_PROCESSOR_EU' 
@@ -6,28 +11,29 @@ processor_version = 'rc'
 mime_type = 'application/pdf' 
 processor_id = ''
 
+# Imports
 import os
 import re
 import pandas as pd
 import shutil
-
+from os import listdir 
+import os
+import fasttext as ft 
+import PyPDF2
 from typing import Sequence
 from google.api_core.client_options import ClientOptions
 from google.cloud import documentai
 
+
 # FASTTEXT LANGUAGE detection 
-import fasttext as ft 
 ft_model = ft.load_model(os.path.join('..','preprocessing',"lid.176.ftz"))
 def fasttext_language_predict(text, model = ft_model): 
   text = text.replace('\n', " ")
   prediction = model.predict([text]) 
   return prediction
 
-
-
 # PROCESS DOCUMENT AI CORE
-# This function links Document AI from Google to the Google processor we just made
-
+# This function links Document AI from Google to the Google processor 
 def process_document(
     project_id: str,
     location: str,
@@ -36,6 +42,7 @@ def process_document(
     file_path: str,
     mime_type: str,
 ) -> documentai.Document:
+    
     # You must set the api_endpoint if you use a location other than 'us', e.g.:
     opts = ClientOptions(api_endpoint=f"{location}-documentai.googleapis.com")
 
@@ -59,10 +66,10 @@ def process_document(
     request = documentai.ProcessRequest(name=name, raw_document=raw_document)
 
     result = client.process_document(request=request)
-
     return result.document
 
-
+# OCR Processing
+# Function to process document with Google Cloud
 def process_document_ocr(    project_id: str,    location: str,    processor_id: str,
     processor_version: str,    file_path: str,    document_id: str,    mime_type: str, output_path) -> None:
 
@@ -113,7 +120,6 @@ def process_document_ocr(    project_id: str,    location: str,    processor_id:
     # Return dataframe
     return new_df
 
-
 def print_paragraphs(paragraphs: Sequence[documentai.Document.Page.Paragraph], text: str, new_row: list, cols: list, base: int) -> None:
     if len(paragraphs)!=0:
         for x in range (len(paragraphs)):
@@ -143,23 +149,16 @@ def layout_to_text(layout: documentai.Document.Page.Layout, text: str) -> str:
         response += text[start_index:end_index]
     return response
 
-
-
-# This function checks if files are still to be processed
-# These documents have already been processed into a .txt file
-# Make a list of these documents to not feed them to Google Document AI
- 
-from os import listdir 
-import os
-
-# Function to count pages in .pdf
-import PyPDF2
-
+# Function to count the number of pages in .pdf
 def get_nr_of_pages(file):
     readpdf = PyPDF2.PdfFileReader(file)
     totalpages = readpdf.numPages
     return totalpages
 
+
+# This function checks if files are still to be processed
+# These documents have already been processed into a .txt file
+# It makes a list of these documents to not feed them to Google Document AI
 def check_if_processed(file_to_check):
     
     documents=[]
@@ -187,7 +186,10 @@ def check_if_processed(file_to_check):
     else:
         return True
  
-
+# This function processes the pdf
+# It checks the number of pages to see if file needs to be split (DocumentAI accepts 10 pages max)
+# After check it feeds the document to DocumentAI
+# It returns a code for our app
 
 def process_pdf(path,document_id,df):
  
@@ -222,14 +224,12 @@ def process_pdf(path,document_id,df):
                 df = pd.concat([df, new_df], ignore_index = True)
 
                 print(f"Processing {document_id} : Done                                             ",end='\r') 
-
                 return 'OK', f'Processed {document_id}'
             
             else:    
                 # Copy pdf file with > 10 pages to error folder
                 src_path = file_path
                 dst_path = os.path.join(output_path,'too_large')
-
                 
                 if not os.path.exists(dst_path):
                     os.mkdir(dst_path)
@@ -237,7 +237,6 @@ def process_pdf(path,document_id,df):
                 dst_file= os.path.join(dst_path,document_id)
                 shutil.copy(src_path, dst_file)
                 print(f'{document_id}: Too Large', end="\r")
-
                 return 'LARGE','too_large file, has to be split'
  
         else:

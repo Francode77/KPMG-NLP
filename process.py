@@ -10,13 +10,8 @@ TOKEN = ""
 # Setup the webhook
 # https://api.telegram.org/...
 
-
-"""
-pip install --upgrade google-cloud-documentai
-pip install fasttext
-pip install pyPDF2
-"""
-
+ 
+# Imports
 import os 
 import shutil
 import requests
@@ -32,9 +27,10 @@ from processing.split_max_10_pages import split_max_page_10
 from processing.combine_txt_files import combine_txt_files
 from processing.split_pdf_vertically import split_file,splitpage
 
+# Telegram channel token here
 TOKEN = ""
 
-
+# Function to get the Paritair Comité from the comite_list
 def get_comitee (file_id:str):
     with open("../csv/comite_list.txt") as f:
         pcs_from_text = f.read()
@@ -48,7 +44,7 @@ def get_comitee (file_id:str):
     except KeyError:
         return "Invalid number of comitee"
  
-
+# Function that returns a clickable URL 
 def make_link(document_id):
     link_base = 'https://public-search.werk.belgie.be/website-download-service/joint-work-convention/'
     pos=document_id.find('-') 
@@ -57,6 +53,7 @@ def make_link(document_id):
     full_link = link_base + str(JC_num)+ str(document_id)
     return full_link
 
+# Function to send message to telegram
 def tel_send_message(chat_id, text):
     url = f'https://api.telegram.org/bot{TOKEN}/sendMessage'
     payload = {
@@ -67,6 +64,7 @@ def tel_send_message(chat_id, text):
     r = requests.post(url,json=payload)
     return r
 
+# Function to extract the document ID from the text
 def get_details(document_id):
     file=f'{document_id}.txt'
     file_path=os.path.join('..','tmp',file)
@@ -87,6 +85,8 @@ def get_details(document_id):
     
     return cao_nr, depot, registr
 
+# The function that will process a document 
+# Callable from the web application
 def process (document_id):
     
     chat_id='409700231'
@@ -112,15 +112,16 @@ def process (document_id):
     v_split_status_code=split_file(path,document_id,language)
     
     if v_split_status_code=="Success": 
-        tel_send_message(chat_id,f'Status: Vertical Split.. : Done.')        
+        tel_send_message(chat_id,f'Status: Vertical Split.. : Done.')   
+
         # MOVE pdf FILE TO /tmp
         path_PDF=os.path.join(path,'pdf')
         src_path = os.path.join(path_PDF,f'{document_id}.pdf')
         dst_path = os.path.join(path)
         dst_file= os.path.join(dst_path,f'SPLIT_{document_id}.pdf')
         shutil.copy(src_path, dst_file) 
-        #tel_send_message(chat_id,f'Moved the SPLIT pdf')
-        processed_by_cloud_status,stattus=process_pdf(path,f'SPLIT_{document_id}',df)       
+        processed_by_cloud_status,stattus=process_pdf(path,f'SPLIT_{document_id}',df)   
+
         # MOVE txt FILE TO /tmp        
         path_txt=os.path.join(path,'txt')
         src_path = os.path.join(path_txt,f'SPLIT_{document_id}.txt')
@@ -135,14 +136,13 @@ def process (document_id):
 
         if result=='Could not process this file': 
             return returnlist
-        # MOVE FILE TO /tmp
         
+        # MOVE FILE TO /tmp        
         path_NL=os.path.join(path,'NL')
         src_path = os.path.join(path_NL,f'NL_{document_id}.txt')
         dst_path = os.path.join(path)
         dst_file= os.path.join(dst_path,f'{document_id}.txt')
         shutil.copy(src_path, dst_file) 
-        #tel_send_message(chat_id,f'Moved {document_id}.txt')
  
     tel_send_message(chat_id,f'Feeding to Google DocumentAI.. ')
 
@@ -172,7 +172,8 @@ def process (document_id):
     summary='Not detected'
     
     tel_send_message(chat_id,f'Working on a summary (this can take a while).. ')
-    # Summarizet the text
+
+    # Summarize the text
     summary=get_abstr_summary(document_id,language)
 
     tel_send_message(chat_id,f'Summary:\n\n{summary}')
@@ -181,30 +182,7 @@ def process (document_id):
     url+=f'.pdf'
     tel_send_message(chat_id,f'Link: {url} ')
 
-
-
     returnlist={'PC':PC,'cao':cao_nr,'depot':depot,'register':registr,'sum':summary,'url':url}
     return returnlist
-
-    
-
-"""
-
-    # Now we have a text file
-    text_file=f'{language}_{document_id}.txt'
- 
-    text_file_path=os.path.join('..','processed_data','NL',text_file)
-    try:
-        with open (text_file_path,encoding="UTF-8") as f:
-            text=f.read()
-    except:
-        text_file=f'{document_id}.txt'
-        text_file_path=os.path.join('..','processed_data','NL',text_file)
-
-        with open (text_file_path,encoding="UTF-8") as f:
-            text=f.read()
-    
-    # RETURN TEXT?
-"""
 
             
