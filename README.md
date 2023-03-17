@@ -71,7 +71,7 @@ A file input on the webserver is feeded to the process.py file which will run mo
   - model_h_robberta_clusters : To make the targets from 100 clusters
   - model_h_robberta_clusters_RUN : To Run the model on a .csv file with condensed text and cluster targets
   
-## B) Live-Processing (for demo app)
+## B) Live-Processing 
 
 *Callable function*
 
