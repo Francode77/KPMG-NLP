@@ -1,5 +1,5 @@
 # KPMG-NLP
-
+*This project is a learning project, we had to present a demo application within 8 days to present at KPMG*
 
 ## Scope:
 This project is developed for KPMG, an International Limited is a multinational professional services network, and one of the Big Four accounting organizations. 
