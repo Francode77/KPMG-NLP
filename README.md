@@ -21,10 +21,9 @@ On this data we applied clustering and fine-tuned a pretrained Dutch based Rober
 
 A webserver will run with an input form. There we will locate a new CLA file in .pdf format that is supposedly obtained from a feed or a similar method.
 
-For demo we run a telegram bot for notification on Telegram
-![telegram bot](https://github.com/Francode77/KPMG-NLP/blob/francode/assets/live_processing.png)
+For the presentation demo we run a telegram bot which live processing and real-time notifications on Telegram.
 
-
+<img src="https://github.com/Francode77/KPMG-NLP/blob/francode/assets/live_processing.png"  alt="the telegram processing bot" width="300" height="600">
 **Live-Processing** 
 
 A file input on the webserver is feeded to the process.py file which will run modified functions from preprocessing sequentially.
